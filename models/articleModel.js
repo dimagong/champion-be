@@ -1,8 +1,21 @@
+export class ArticleEntity {
+	constructor(question, answer) {
+		this.question = question
+		this.answer = answer
+	}
+}
+
+export class ArticlesContent {
+	constructor(id, data) {
+		this.id = id
+		this.data = data
+	}
+}
+
 export class Article {
-	constructor(title, subTitle, content, url) {
+	constructor(title, subTitle, url) {
 		this.title = title
 		this.subTitle = subTitle
-		this.content = content
 		this.url = url
 	}
 }
