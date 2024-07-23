@@ -36,20 +36,18 @@ export const articles = async (req, res) => {
 				docIdx.map(async (id) => {
 					const docById = articlesRef.doc(id)
 					const collectionsDocId = await docById.listCollections()
-					//let content = { id, data: null }
 					let content = { ...new ArticlesContent(id, null) }
 					const dataContent = await Promise.all(
 						collectionsDocId.map(async (el) => {
 							const snapshot = await el.get()
 							let snapshotData = []
 							snapshot.forEach((doc) => {
-								// snapshotData.push(doc.data())
 								snapshotData.push({ ...new ArticleEntity(doc.data().question, doc.data().answer) })
 							})
 							return snapshotData
 						})
 					)
-					content.data = [...dataContent]
+					content.data = [...dataContent].flat()
 					return content
 				})
 			)
@@ -58,8 +56,21 @@ export const articles = async (req, res) => {
 		}
 
 		const completeContent = await collectContent()
-		// console.log("competeContent  =>", completeContent)
-		return res.status(200).json(completeContent)
+
+		const articles = listCollectionsDocs.map((doc) => {
+			return {
+				...new ArticleId(doc.id, doc.data().title, doc.data().subtitle, doc.data().url),
+			}
+		})
+
+		articles.forEach((article) => {
+			const findContent = completeContent.find((content) => content.id === article.id)
+			if (findContent) {
+				article.content = { ...findContent }
+			}
+		})
+
+		return res.status(200).json(articles)
 	} catch (error) {
 		return res.status(500).json({ general: "Something went wrong, please try again" })
 	}

@@ -13,10 +13,11 @@ export class ArticlesContent {
 }
 
 export class Article {
-	constructor(title, subTitle, url) {
+	constructor(title, subTitle, url, id) {
 		this.title = title
 		this.subTitle = subTitle
 		this.url = url
+		this.id = id
 	}
 }
 
