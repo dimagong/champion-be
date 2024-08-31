@@ -12,4 +12,5 @@ admin.initializeApp({
 })
 
 const adminDB = admin.firestore()
-export { admin, adminDB }
+const adminStorage = admin.storage()
+export { admin, adminDB, adminStorage }
