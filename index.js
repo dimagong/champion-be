@@ -7,6 +7,7 @@ import { updateArticle } from "./services/updateArticle.js"
 import { deleteArticle } from "./services/deleteArticle.js"
 import { videoBestMoments } from "./services/videoBestMoments.js"
 import { imgBestMoments } from "./services/imgBestMoments.js"
+import { createPaymentSheet } from "./services/paymentMethod.js"
 
 const app = express()
 
@@ -26,4 +27,9 @@ app.get("/video", videoBestMoments)
 
 app.get("/img", imgBestMoments)
 
+app.post("/payment-sheet", (req, res) => createPaymentSheet(req, res))
+
+//=======
+//====
+//=
 app.listen(config.port, () => console.log(`Server is live @ ${config.hostUrl}`))

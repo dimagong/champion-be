@@ -24,6 +24,8 @@ const {
 	AUTH_PROVIDER_X509_CERT_URL,
 	CLIENT_X509_CERT_URL,
 	UNIVERSE_DOMAIN,
+	PUBLIC_KEY_STRIPE,
+	SECRET_KEY_STRIPE,
 } = process.env
 
 assert(PORT, "Port is required")
@@ -56,5 +58,9 @@ export default {
 		messagingSenderId: MESSAGING_SENDER_ID,
 		appId: APP_ID,
 		measurementId: MEASUREMENT_ID,
+	},
+	stripeConfig: {
+		publicKeyStripe: PUBLIC_KEY_STRIPE,
+		secretKeyStripe: SECRET_KEY_STRIPE,
 	},
 }
