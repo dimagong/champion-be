@@ -1,14 +1,16 @@
-import { createRequire } from "module"
-import admin from "firebase-admin"
-import config from "./../config.js"
+//import { createRequire } from 'module'
+import admin from 'firebase-admin'
+import config from '../config'
 
-const require = createRequire(import.meta.url)
+//const require = createRequire(import.meta.url);
 
 //var serviceAccount = require("./../champion-db-b530d-firebase-adminsdk-7lyvu-9a4bdd139c.json")
 // const { serviceAccount } = require("./../config")
 
 admin.initializeApp({
-	credential: admin.credential.cert({ ...config.serviceAccount }),
+    credential: admin.credential.cert(
+        config.serviceAccount as admin.ServiceAccount
+    ),
 })
 
 const adminDB = admin.firestore()
