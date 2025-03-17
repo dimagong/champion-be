@@ -10,7 +10,7 @@ import { imgBestMoments } from './services/imgBestMoments'
 import {
     createPaymentSheet,
     getPublicKeyStripe,
-} from './services/paymentMethod.js'
+} from './services/paymentMethod'
 import { routerPremierLeague } from './routes/premierLeague'
 import { errorHandler } from './util/errorHandler'
 import { Request, Response, NextFunction } from 'express'

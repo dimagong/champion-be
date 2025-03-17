@@ -1,5 +1,5 @@
-import { adminDB, admin } from '../util/admin.js'
-import { Article } from '../models/articleModel.js'
+import { adminDB, admin } from '../util/admin'
+import { Article } from '../models/articleModel'
 import { Request, Response, NextFunction } from 'express'
 
 export const createArticle = async (req: Request, res: Response) => {

@@ -1,4 +1,4 @@
-import { adminStorage } from '../util/admin.js'
+import { adminStorage } from '../util/admin'
 import { getDownloadURL } from 'firebase-admin/storage'
 import { Request, Response, NextFunction } from 'express'
 

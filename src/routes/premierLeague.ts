@@ -1,6 +1,6 @@
 import express from 'express'
-import { getPremierLeagueCompetitions } from '../resolvers/premierLeagueResolvers/getPremierLeagueCompetitions.js'
-import { getPremierLeagueResults } from '../resolvers/premierLeagueResolvers/getPremierLeagueResults.js'
+import { getPremierLeagueCompetitions } from '../resolvers/premierLeagueResolvers/getPremierLeagueCompetitions'
+import { getPremierLeagueResults } from '../resolvers/premierLeagueResolvers/getPremierLeagueResults'
 import { Request, Response, NextFunction } from 'express'
 
 export const routerPremierLeague = express.Router()
