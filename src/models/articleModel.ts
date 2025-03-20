@@ -36,7 +36,7 @@ export class ArticleId extends Article {
         data: string[] | null
     } | null
     constructor(id: string, title: string, subTitle: string, url: string) {
-        super(id, title, subTitle, url)
+        super(title, subTitle, url, id)
         this.id = id
         this.content = null
     }

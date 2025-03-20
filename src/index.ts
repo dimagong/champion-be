@@ -1,19 +1,12 @@
 import config from './config'
 import express from 'express'
 import cors from 'cors'
-import { articles } from './services/articles'
-import { createArticle } from './services/createArticle'
-import { updateArticle } from './services/updateArticle'
-import { deleteArticle } from './services/deleteArticle'
-import { videoBestMoments } from './services/videoBestMoments'
-import { imgBestMoments } from './services/imgBestMoments'
-import {
-    createPaymentSheet,
-    getPublicKeyStripe,
-} from './services/paymentMethod'
 import { routerPremierLeague } from './routes/premierLeague'
 import { errorHandler } from './util/errorHandler'
 import { Request, Response, NextFunction } from 'express'
+import { routerArticles } from './routes/articles'
+import { routerPayment } from './routes/payment'
+import { routerVideoImg } from './routes/videoImg'
 
 const app = express()
 
@@ -29,90 +22,16 @@ app.use(cors())
 //     next();
 // });
 
-app.get(
-    '/articles',
-    async (req: Request, res: Response, next: NextFunction) => {
-        try {
-            await articles(req, res)
-            next()
-        } catch (err) {
-            next(err)
-        }
-    }
-)
+app.use(routerArticles)
 
-app.post('/add', async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        await createArticle(req, res)
-        next()
-    } catch (err) {
-        next(err)
-    }
-})
+app.use(routerPayment)
 
-app.put('/update/:id', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        updateArticle(req, res)
-    } catch (err) {
-        next(err)
-    }
-})
+app.use(routerVideoImg)
 
-app.delete('/delete/:id', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        deleteArticle(req, res)
-    } catch (err) {
-        next(err)
-    }
-})
-
-app.get('/video', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        videoBestMoments(req, res)
-    } catch (err) {
-        next(err)
-    }
-})
-
-app.get('/img', (req: Request, res: Response, next: NextFunction) => {
-    try {
-        imgBestMoments(req, res)
-    } catch (err) {
-        next(err)
-    }
-})
-
-app.post(
-    '/payment-sheet',
-    (req: Request, res: Response, next: NextFunction) => {
-        try {
-            createPaymentSheet(req, res)
-        } catch (err) {
-            next(err)
-        }
-    }
-)
-
-app.get(
-    '/payment-public-permission',
-    (req: Request, res: Response, next: NextFunction) => {
-        try {
-            getPublicKeyStripe(req, res)
-        } catch (err) {
-            next(err)
-        }
-    }
-)
-//=======
-//====
-//=
 app.use('/premierLeague', routerPremierLeague)
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     errorHandler(req, res, next, err)
 })
 
-//=======
-//====
-//=
 app.listen(config.port, () => console.log(`Server is live @ ${config.hostUrl}`))

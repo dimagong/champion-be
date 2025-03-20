@@ -1,5 +1,5 @@
-import { adminDB, admin } from '../util/admin'
-import { db } from '../util/firebase'
+import { adminDB, admin } from '../../util/admin'
+import { db } from '../../util/firebase'
 import {
     getFirestore,
     collection,
@@ -15,7 +15,7 @@ import {
     ArticleId,
     ArticlesContent,
     ArticleEntity,
-} from '../models/articleModel'
+} from '../../models/articleModel'
 import { Request, Response, NextFunction } from 'express'
 
 export const articles = async (req: Request, res: Response) => {
@@ -68,6 +68,7 @@ export const articles = async (req: Request, res: Response) => {
         const completeContent = await collectContent()
 
         const articles = listCollectionsDocs.map((doc) => {
+            //id: string, title: string, subTitle: string, url: string
             return {
                 ...new ArticleId(
                     doc.id,
@@ -77,7 +78,6 @@ export const articles = async (req: Request, res: Response) => {
                 ),
             }
         })
-
         articles.forEach((article) => {
             const findContent = completeContent.find(
                 (content) => content.id === article.id

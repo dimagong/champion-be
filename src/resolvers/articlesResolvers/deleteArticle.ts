@@ -1,4 +1,4 @@
-import { adminDB, admin } from '../util/admin'
+import { adminDB, admin } from '../../util/admin'
 import { Request, Response, NextFunction } from 'express'
 // import { ArticleId } from "./../models/articleModel.js"
 
